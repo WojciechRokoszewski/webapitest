@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BlueYonderModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="BlueYonderModelStoreContainer">
+    <EntitySet Name="Flights" EntityType="BlueYonderModel.Store.Flights" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FlightSchedules" EntityType="BlueYonderModel.Store.FlightSchedules" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Locations" EntityType="BlueYonderModel.Store.Locations" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Reservations" EntityType="BlueYonderModel.Store.Reservations" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Travelers" EntityType="BlueYonderModel.Store.Travelers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Trips" EntityType="BlueYonderModel.Store.Trips" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_dbo_Flights_dbo_Locations_Destination_LocationId" Association="BlueYonderModel.Store.FK_dbo_Flights_dbo_Locations_Destination_LocationId">
+      <End Role="Locations" EntitySet="Locations" />
+      <End Role="Flights" EntitySet="Flights" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Flights_dbo_Locations_Source_LocationId" Association="BlueYonderModel.Store.FK_dbo_Flights_dbo_Locations_Source_LocationId">
+      <End Role="Locations" EntitySet="Locations" />
+      <End Role="Flights" EntitySet="Flights" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_FlightSchedules_dbo_Flights_FlightId" Association="BlueYonderModel.Store.FK_dbo_FlightSchedules_dbo_Flights_FlightId">
+      <End Role="Flights" EntitySet="Flights" />
+      <End Role="FlightSchedules" EntitySet="FlightSchedules" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Reservations_dbo_Trips_DepartFlightScheduleID" Association="BlueYonderModel.Store.FK_dbo_Reservations_dbo_Trips_DepartFlightScheduleID">
+      <End Role="Trips" EntitySet="Trips" />
+      <End Role="Reservations" EntitySet="Reservations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Reservations_dbo_Trips_ReturnFlightScheduleID" Association="BlueYonderModel.Store.FK_dbo_Reservations_dbo_Trips_ReturnFlightScheduleID">
+      <End Role="Trips" EntitySet="Trips" />
+      <End Role="Reservations" EntitySet="Reservations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Trips_dbo_FlightSchedules_FlightScheduleID" Association="BlueYonderModel.Store.FK_dbo_Trips_dbo_FlightSchedules_FlightScheduleID">
+      <End Role="FlightSchedules" EntitySet="FlightSchedules" />
+      <End Role="Trips" EntitySet="Trips" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Flights">
+    <Key>
+      <PropertyRef Name="FlightId" />
+    </Key>
+    <Property Name="FlightId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="FlightNumber" Type="nvarchar(max)" />
+    <Property Name="FrequentFlyerMiles" Type="int" Nullable="false" />
+    <Property Name="Source_LocationId" Type="int" />
+    <Property Name="Destination_LocationId" Type="int" />
+  </EntityType>
+  <EntityType Name="FlightSchedules">
+    <Key>
+      <PropertyRef Name="FlightScheduleId" />
+    </Key>
+    <Property Name="FlightScheduleId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Departure" Type="datetime" Nullable="false" />
+    <Property Name="ActualDeparture" Type="datetime" />
+    <Property Name="Duration" Type="time" Nullable="false" />
+    <Property Name="FlightId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Locations">
+    <Key>
+      <PropertyRef Name="LocationId" />
+    </Key>
+    <Property Name="LocationId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Country" Type="nvarchar(max)" />
+    <Property Name="State" Type="nvarchar(max)" />
+    <Property Name="City" Type="nvarchar(max)" />
+    <Property Name="CountryCode" Type="nvarchar(max)" />
+    <Property Name="ThumbnailImageFile" Type="nvarchar(max)" />
+    <Property Name="TimeZoneId" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Reservations">
+    <Key>
+      <PropertyRef Name="ReservationId" />
+    </Key>
+    <Property Name="ReservationId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="TravelerId" Type="int" Nullable="false" />
+    <Property Name="ReservationDate" Type="datetime" Nullable="false" />
+    <Property Name="ConfirmationCode" Type="nvarchar(max)" />
+    <Property Name="DepartFlightScheduleID" Type="int" Nullable="false" />
+    <Property Name="ReturnFlightScheduleID" Type="int" />
+  </EntityType>
+  <EntityType Name="Travelers">
+    <Key>
+      <PropertyRef Name="TravelerId" />
+    </Key>
+    <Property Name="TravelerId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="TravelerUserIdentity" Type="nvarchar(max)" />
+    <Property Name="FirstName" Type="nvarchar(max)" />
+    <Property Name="LastName" Type="nvarchar(max)" />
+    <Property Name="MobilePhone" Type="nvarchar(max)" />
+    <Property Name="HomeAddress" Type="nvarchar(max)" />
+    <Property Name="Passport" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Trips">
+    <Key>
+      <PropertyRef Name="TripId" />
+    </Key>
+    <Property Name="TripId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="FlightScheduleID" Type="int" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="Class" Type="int" Nullable="false" />
+    <Property Name="ThumbnailImage" Type="nvarchar(max)" />
+  </EntityType>
+  <Association Name="FK_dbo_Flights_dbo_Locations_Destination_LocationId">
+    <End Role="Locations" Type="BlueYonderModel.Store.Locations" Multiplicity="0..1" />
+    <End Role="Flights" Type="BlueYonderModel.Store.Flights" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Locations">
+        <PropertyRef Name="LocationId" />
+      </Principal>
+      <Dependent Role="Flights">
+        <PropertyRef Name="Destination_LocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Flights_dbo_Locations_Source_LocationId">
+    <End Role="Locations" Type="BlueYonderModel.Store.Locations" Multiplicity="0..1" />
+    <End Role="Flights" Type="BlueYonderModel.Store.Flights" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Locations">
+        <PropertyRef Name="LocationId" />
+      </Principal>
+      <Dependent Role="Flights">
+        <PropertyRef Name="Source_LocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_FlightSchedules_dbo_Flights_FlightId">
+    <End Role="Flights" Type="BlueYonderModel.Store.Flights" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="FlightSchedules" Type="BlueYonderModel.Store.FlightSchedules" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Flights">
+        <PropertyRef Name="FlightId" />
+      </Principal>
+      <Dependent Role="FlightSchedules">
+        <PropertyRef Name="FlightId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Reservations_dbo_Trips_DepartFlightScheduleID">
+    <End Role="Trips" Type="BlueYonderModel.Store.Trips" Multiplicity="1" />
+    <End Role="Reservations" Type="BlueYonderModel.Store.Reservations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Trips">
+        <PropertyRef Name="TripId" />
+      </Principal>
+      <Dependent Role="Reservations">
+        <PropertyRef Name="DepartFlightScheduleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Reservations_dbo_Trips_ReturnFlightScheduleID">
+    <End Role="Trips" Type="BlueYonderModel.Store.Trips" Multiplicity="0..1" />
+    <End Role="Reservations" Type="BlueYonderModel.Store.Reservations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Trips">
+        <PropertyRef Name="TripId" />
+      </Principal>
+      <Dependent Role="Reservations">
+        <PropertyRef Name="ReturnFlightScheduleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Trips_dbo_FlightSchedules_FlightScheduleID">
+    <End Role="FlightSchedules" Type="BlueYonderModel.Store.FlightSchedules" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Trips" Type="BlueYonderModel.Store.Trips" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FlightSchedules">
+        <PropertyRef Name="FlightScheduleId" />
+      </Principal>
+      <Dependent Role="Trips">
+        <PropertyRef Name="FlightScheduleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

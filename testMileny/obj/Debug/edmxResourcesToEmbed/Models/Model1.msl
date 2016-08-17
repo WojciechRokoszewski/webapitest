@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BlueYonderModelStoreContainer" CdmEntityContainer="BlueYonderEntities">
+    <EntitySetMapping Name="Flights">
+      <EntityTypeMapping TypeName="BlueYonderModel.Flights">
+        <MappingFragment StoreEntitySet="Flights">
+          <ScalarProperty Name="FlightId" ColumnName="FlightId" />
+          <ScalarProperty Name="FlightNumber" ColumnName="FlightNumber" />
+          <ScalarProperty Name="FrequentFlyerMiles" ColumnName="FrequentFlyerMiles" />
+          <ScalarProperty Name="Source_LocationId" ColumnName="Source_LocationId" />
+          <ScalarProperty Name="Destination_LocationId" ColumnName="Destination_LocationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FlightSchedules">
+      <EntityTypeMapping TypeName="BlueYonderModel.FlightSchedules">
+        <MappingFragment StoreEntitySet="FlightSchedules">
+          <ScalarProperty Name="FlightScheduleId" ColumnName="FlightScheduleId" />
+          <ScalarProperty Name="Departure" ColumnName="Departure" />
+          <ScalarProperty Name="ActualDeparture" ColumnName="ActualDeparture" />
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="FlightId" ColumnName="FlightId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Locations">
+      <EntityTypeMapping TypeName="BlueYonderModel.Locations">
+        <MappingFragment StoreEntitySet="Locations">
+          <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+          <ScalarProperty Name="ThumbnailImageFile" ColumnName="ThumbnailImageFile" />
+          <ScalarProperty Name="TimeZoneId" ColumnName="TimeZoneId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reservations">
+      <EntityTypeMapping TypeName="BlueYonderModel.Reservations">
+        <MappingFragment StoreEntitySet="Reservations">
+          <ScalarProperty Name="ReservationId" ColumnName="ReservationId" />
+          <ScalarProperty Name="TravelerId" ColumnName="TravelerId" />
+          <ScalarProperty Name="ReservationDate" ColumnName="ReservationDate" />
+          <ScalarProperty Name="ConfirmationCode" ColumnName="ConfirmationCode" />
+          <ScalarProperty Name="DepartFlightScheduleID" ColumnName="DepartFlightScheduleID" />
+          <ScalarProperty Name="ReturnFlightScheduleID" ColumnName="ReturnFlightScheduleID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Travelers">
+      <EntityTypeMapping TypeName="BlueYonderModel.Travelers">
+        <MappingFragment StoreEntitySet="Travelers">
+          <ScalarProperty Name="TravelerId" ColumnName="TravelerId" />
+          <ScalarProperty Name="TravelerUserIdentity" ColumnName="TravelerUserIdentity" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+          <ScalarProperty Name="HomeAddress" ColumnName="HomeAddress" />
+          <ScalarProperty Name="Passport" ColumnName="Passport" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Trips">
+      <EntityTypeMapping TypeName="BlueYonderModel.Trips">
+        <MappingFragment StoreEntitySet="Trips">
+          <ScalarProperty Name="TripId" ColumnName="TripId" />
+          <ScalarProperty Name="FlightScheduleID" ColumnName="FlightScheduleID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Class" ColumnName="Class" />
+          <ScalarProperty Name="ThumbnailImage" ColumnName="ThumbnailImage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
